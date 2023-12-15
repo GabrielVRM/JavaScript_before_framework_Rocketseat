@@ -3,6 +3,8 @@
 export class Favorites {
   constructor(root) {
     this.root = document.querySelector(root);
+     this.tbody = this.root.querySelector("table tbody");
+
     this.load()
   }
 
@@ -12,7 +14,7 @@ export class Favorites {
           login: "GabrielVRM",
           name: "Gabriel Vieira",
           public_repos: "87",
-          followers: "120000",
+          followers: "19200",
         },
         {
           login: "Diegogb",
@@ -35,14 +37,23 @@ export class FavoritesView extends Favorites {
     // this.removeAllTr()
   
     this.entries.forEach( user => {
-const row = this.createRow()
-console.log(row)
-    })
+ const row = this.createRow()
+
+ row.querySelector('.user img').src = `https://github.com/${user.login}.png`
+ row.querySelector('a').hrefn = `https://github.com/${user.login}`
+ row.querySelector('p').innerText = `${user.login}`
+ row.querySelector('span').innerText = `${user.name}`
+ row.querySelector('.repositories').innerText = `${user.public_repos}`
+ row.querySelector('.followers').innerText = `${user.followers}`
+
+
+ this.tbody.append(row)
+})
   }
 
   createRow() {
     const tr = document.createElement("tr");
-    const data = `
+   tr.innerHTML = `
             <td class="user">
             <img src="https://github.com/maykbrito.png" alt="Imagem de Mayk Brito">
             <a href="https://github.com/maykbrito" target="_blank">
@@ -58,16 +69,12 @@ console.log(row)
                 </td>
                 <td>&times;</td>  
                 `;
-
-    tr.innerText = data;
-
     return tr;
   }
 
   removeAllTr() {
-    const tbody = this.root.querySelector("table tbody");
 
-    tbody.querySelectorAll("tr").forEach((tr) => {
+    this.tbody.querySelectorAll("tr").forEach((tr) => {
       tr.remove();
     });
   }

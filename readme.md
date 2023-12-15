@@ -15,6 +15,7 @@
 - Objetos,
 - SPA, 
 
+
 > tecnologias: 
 - JavaScript  & CSS 
 - lite-server, para atualizações runtime do projeto!
