@@ -24,6 +24,11 @@ export class Favorites {
         },
       ]
   }
+
+  delete(user){
+    const filtered = this.entries.filter(entry => entry.login !== user.login);
+    console.log(filtered)
+  }
 }
 
 // classe que vai criar visualização e eventos html
@@ -46,14 +51,19 @@ export class FavoritesView extends Favorites {
  row.querySelector('.repositories').innerText = `${user.public_repos}`
  row.querySelector('.followers').innerText = `${user.followers}`
 
-
+row.querySelector('.remove').onclick = () => {
+  const isOk = confirm("tem certeza que deseja remover?")
+  if (isOk) {
+    this.delete(user)
+  }
+}
  this.tbody.append(row)
 })
   }
 
   createRow() {
     const tr = document.createElement("tr");
-   tr.innerHTML = `
+    tr.innerHTML = `
             <td class="user">
             <img src="https://github.com/maykbrito.png" alt="Imagem de Mayk Brito">
             <a href="https://github.com/maykbrito" target="_blank">
@@ -67,15 +77,20 @@ export class FavoritesView extends Favorites {
                 <td class="followers">
                 9589
                 </td>
-                <td>&times;</td>  
-                `;
-    return tr;
-  }
-
-  removeAllTr() {
-
-    this.tbody.querySelectorAll("tr").forEach((tr) => {
-      tr.remove();
-    });
+                <td>
+                <button class="remove">&times;</button>
+                </td>
+                      `;
+                
+                console.log(tr)
+                return tr;
+                
+              }
+              
+              removeAllTr() {
+                
+                this.tbody.querySelectorAll("tr").forEach((tr) => {
+                  tr.remove();
+                });
   }
 }
