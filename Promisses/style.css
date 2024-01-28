@@ -74,7 +74,7 @@
         height: 3.2rem;
         border: none;
         padding: 0 1rem;
-      
+        cursor: pointer;
   }
 
   .search button:hover {
@@ -146,4 +146,6 @@ table tr:nth-child(even) {
     background: none;
     border: none;
     color: red;
+    cursor: pointer;  
+
   }
